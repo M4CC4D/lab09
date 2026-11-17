@@ -1,9 +1,6 @@
 package it.unibo.mvc;
 
 import java.util.List;
-import java.util.LinkedList;
-import java.util.Objects;
-import java.lang.IllegalStateException;
 
 /**
  * This interface represents a controller in the MVC pattern,
@@ -11,32 +8,31 @@ import java.lang.IllegalStateException;
  */
 public interface Controller {
 
+    /**
+     * print in stdout.
+     */
     void print();
 
-    public static class ControllerImpl implements Controller {
+    /**
+     * setta la nuova stringa.
+     * 
+     * @param message messaggio
+     */
+    void nextString(String message);
 
-        private List<String> messages = new LinkedList<>();
+    /**
+     * prende la nuova stringa.
+     * 
+     * @return Una stringa
+     */
+    String getString();
 
-        public void nextString(String message){
-            Objects.requireNonNull(message);
-            messages.add(message);
-        }
-
-        public String getString() {
-            return new String(messages.getLast());
-        }
-
-        public List<String> getHistory() {
-            return List.copyOf(messages);
-        }
-
-        public void print() {
-            if(messages.isEmpty()) {
-                throw new IllegalStateException();
-            }
-            IO.println(messages.getLast());
-        }
-
-    }
+    /**
+     * prende tutte le stringe messe.
+     * 
+     * @return una lista di stringe
+     * 
+     */
+    List<String> getHistory();
 
 }
